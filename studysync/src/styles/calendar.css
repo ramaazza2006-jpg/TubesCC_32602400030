@@ -1,0 +1,69 @@
+.study-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+/* Header bulan */
+.study-calendar .react-calendar__navigation {
+  margin-bottom: 15px;
+}
+
+.study-calendar .react-calendar__navigation button {
+  min-height: 42px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.study-calendar .react-calendar__navigation button:hover {
+  background: #eff6ff;
+}
+
+/* Nama hari */
+.study-calendar .react-calendar__month-view__weekdays {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.study-calendar .react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+/* Kotak tanggal */
+.study-calendar .react-calendar__tile {
+  height: 54px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover */
+.study-calendar .react-calendar__tile:hover {
+  background: #dbeafe;
+}
+
+/* Hari ini */
+.study-calendar .react-calendar__tile--now {
+  background: #bfdbfe !important;
+  color: #1d4ed8;
+  font-weight: bold;
+}
+
+/* Tanggal dipilih */
+.study-calendar .react-calendar__tile--active {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+/* Hari di luar bulan */
+.study-calendar .react-calendar__month-view__days__day--neighboringMonth {
+  color: #cbd5e1;
+}

@@ -1,0 +1,30 @@
+@import "tailwindcss";  
+
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+.react-calendar__tile {
+  border-radius: 12px;
+  padding: 12px 0;
+}
+
+.react-calendar__tile--active {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.react-calendar button:hover {
+  background: #eff6ff;
+}
+
+.react-calendar__navigation button {
+  border-radius: 10px;
+}

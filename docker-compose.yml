@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: studysync_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-studysync}
+      MYSQL_USER: ${DB_USER:-studysync}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-studysync123}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - studysync_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASSWORD:-root123}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: studysync_backend
+    restart: always
+    env_file:
+      - ./backend/.env
+    environment:
+      DB_HOST: db
+      S3_ENDPOINT: http://host.docker.internal:4566
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./studysync
+    container_name: studysync_frontend
+    restart: always
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./studysync:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  studysync_db_data:
